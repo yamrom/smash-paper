@@ -3,9 +3,9 @@
 # What to build by default
 EXEC	= fastqs_to_sam mappability_tag mummer mummer-medium mummer-long 
 
-EXTRA_OPTS	=
+EXTRA_OPTS	= -pthread
 #
-EXTRA_LD	= -lpthread
+EXTRA_LD	= -pthread
 # 
 # Shared rules
 include shared.mk
