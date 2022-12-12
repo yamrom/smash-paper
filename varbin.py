@@ -4,9 +4,9 @@ import sys
 import bisect
 
 def main():
-
+        
 	infilename = sys.argv[1]
-        binfilename = sys.argv[2]
+	binfilename = sys.argv[2]
 	outfilename = sys.argv[3]
 	statfilename = sys.argv[4]
 
@@ -20,12 +20,12 @@ def main():
 	for i in range(len(bins)):
 		binCounts.append(0)
 
-	print len(binCounts)
-	print len(bins)
+	print(len(binCounts))
+	print(len(bins))
 
 	binStarts = []
 	for i in range(len(bins)):
-		binStarts.append(long(bins[i][2]))
+		binStarts.append(int(bins[i][2]))
 
 	counter = 0
 	dups = 0
@@ -43,7 +43,7 @@ def main():
 			continue
 		if thisChrom == "":
 			continue
-		if chrominfo.has_key(thisChrom):
+		if thisChrom in chrominfo:
 			pass
 		else:
 			continue
@@ -58,7 +58,7 @@ def main():
 			continue
 			
 		thisChrominfo = chrominfo[thisChrom]
-		thisAbspos = long(thisChrompos) + long(thisChrominfo[2])
+		thisAbspos = int(thisChrompos) + int(thisChrominfo[2])
 		
 		counter += 1
 		#if counter % 100000 == 0:
@@ -86,7 +86,7 @@ def main():
 		"""
 
 
-                indexDown = bisect.bisect(binStarts, thisAbspos)
+		indexDown = bisect.bisect(binStarts, thisAbspos)
 
 		#print thisChrom, thisChrompos, thisAbspos, bins[indexDown], bins[indexDown+1]
 		binCounts[indexDown - 1] += 1
@@ -126,11 +126,11 @@ def fileToDictionary(inputFile, indexColumn):
 	for x in input:
 		arow = x.rstrip().split("\t")
 		id = arow[indexColumn]
-		if rd.has_key(id):
+		if id in rd:
 			#rd[id].append(arow)
-			print "duplicate knowngene id = " + id
-			print "arow =   " + str(arow)
-			print "rd[id] = " + str(rd[id])
+			print("duplicate knowngene id = " + id)
+			print("arow =   " + str(arow))
+			print("rd[id] = " + str(rd[id]))
 		else:
 			rd[id] = arow
 		
