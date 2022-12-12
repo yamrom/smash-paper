@@ -610,7 +610,7 @@ BinWriter & operator<<(BinWriter & writer, const Out out) {
 
 
 template <class Out>
-void longSA::show(Out & output, const bool bin = false) const {
+void longSA::show(Out & output, const bool bin ) const {
   if (N > 10000000000) cerr << "trying to allocate "
                             << N * sizeof(uint64_t) / 1000000000
                             << " GB - make take a while!" << endl;
@@ -691,7 +691,7 @@ void longSA::show(Out & output, const bool bin = false) const {
 
 void longSA::show_mappability(const string & filename) const {
   if (filename == "-") {
-    show(cout);
+    show(cout, false);
   } else if (filename.find(".bin") != string::npos) {
     BinWriter binout(filename);
     show(binout, true);
@@ -700,7 +700,7 @@ void longSA::show_mappability(const string & filename) const {
     ofstream output(filename.c_str());
     ostream & out = output;
     out << "output to output" << endl;
-    show(out);
+    show(out, false);
     output << "done output to output" << endl;
     output << endl;
   }
