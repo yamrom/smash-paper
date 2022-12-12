@@ -10,11 +10,11 @@ import sys
 class readIterator():
     def __init__(self, infilename):
         self.sam = pysam.Samfile(infile, 'rb')
-        self.current     = self.sam.next()
+        self.current     = next(self.sam)
         self.currentName = self.current.qname
         
     ## get the next entry
-    def next(self):
+    def __next__(self):
         if self.currentName == None:
             raise StopIteration
         ans1, ans2 = [], []
@@ -25,7 +25,7 @@ class readIterator():
                 ans2.append(self.current)
             
             try:
-                self.current = self.sam.next()
+                self.current = next(self.sam)
             except:
                 self.current = None
                 self.currentName = None
@@ -44,7 +44,7 @@ class readIterator():
                 
     def __iter__(self):
         self.sam.reset()
-        self.current     = self.sam.next()
+        self.current     = next(self.sam)
         self.currentName = self.current.qname
         return self
     
@@ -143,7 +143,7 @@ minExcessMappability = int(sys.argv[5])
 iterator = readIterator(infile)
 
 ## print out the headings
-print "\t".join(headings)
+print("\t".join(headings))
 
 ## keep a set of keys to watch for duplicates
 dupeSet = set()
@@ -219,14 +219,14 @@ for reads1, reads2 in iterator:
             ## if not in the set, add the key and print output 
             dupeSet.add(key)
             for index in r1_order:
-                print "%s\t%s" % (readID, "\t".join(map(str, read1_info[index])))
+                print("%s\t%s" % (readID, "\t".join(map(str, read1_info[index]))))
             
             for index in r2_order:
-                print "%s\t%s" % (readID, "\t".join(map(str, read2_info[index])))
+                print("%s\t%s" % (readID, "\t".join(map(str, read2_info[index]))))
             n_non_dupe += 1
         else:
             n_dupe += 1
 
-print "%d dupes\t%d non-dupes" % (n_dupe, n_non_dupe)
+print("%d dupes\t%d non-dupes" % (n_dupe, n_non_dupe))
 
 iterator.close()
