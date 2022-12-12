@@ -25,9 +25,9 @@ ifdef tcmalloc
 endif
 
 # Compiler choice
-newgcc			= defined
+newgcc			= /usr/bin/gcc
 ifdef newgcc
-	GCC_DIR		= /data/software/gcc/4.9.2/rtf
+	GCC_DIR		= /mnt/wigtop2/data/software/gcc/7.4.0/rtf
 	PATH		= $(GCC_DIR)/bin:/bin:/usr/bin
 	LD_LIBRARY_PATH	= $(GCC_DIR)/lib64$(extralibs)
 	STD		= -std=c++11 -pedantic
