@@ -11,8 +11,8 @@ this code was tested with GCC 4.9.2
 set environment variables to point to your reference genome fasta
 and the smash code directories, in a manner similar to this:
 
-export SMASH_CODE=/home/paa/analysis/smash-copy-number/smash-paper-code
-export SMASH_REF=/home/paa/analysis/smash-copy-number/chrAll.fa
+export SMASH_CODE=/mnt/wigtop2/data/safe/yamrom/analysis/smash-copy-number/smash-paper-code
+export SMASH_REF=/mnt/wigtop2/data/safe/yamrom/analysis/smash-copy-number/chrAll.fa
 
 to generate a binary index and assorted other files for your genome, run
 $SMASH_CODE/index_setup.sh
